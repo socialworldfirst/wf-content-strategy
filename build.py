@@ -457,6 +457,9 @@ RUNS = """
     <li><strong>WhatsApp Channel</strong> — on trigger only</li>
   </ul>
   <p>One idea, produced once, becomes a TikTok video, an Instagram carousel, a LinkedIn post, a YouTube Short and a WhatsApp alert. The team plans content atoms, not platform posts — and the landscape above is what the audience sees as the result.</p>
+
+  <h3 class="sub">Addendum — engineered for brand search</h3>
+  <p>If brand search is the North Star, this strategy needs one more layer: making content that lifts <em>WorldFirst</em> search, not just <em>topic</em> search. A great Canton Fair video sends people to Google "Canton Fair," not "WorldFirst." The fix — the gateway / author / protagonist modes, the six rules, the before-and-after re-tailoring, and the brand-search test — is set out in the companion page: <a href="brand-search.html">Engineered for brand search →</a></p>
 </section>
 """
 
