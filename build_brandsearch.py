@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-WorldFirst Content Strategy — Brand Search addendum.
-Re-tailors the content strategy with brand search as the North Star metric.
+WorldFirst Content Strategy — Brand Search addendum (evidence-based rebuild).
+Rebuilt on researched best practice: built-in vs bolt-on branding, proven B2B plays.
 Encrypts inner content with 'wf'. Same LS key as index.html (one unlock).
 """
 import os, base64, json, pathlib
@@ -23,62 +23,52 @@ def encrypt_payload(plaintext: str, password: str = PASSWORD) -> dict:
             "iterations":ITERATIONS,"ciphertext":base64.b64encode(ct).decode()}
 
 # ----------------------------------------------------------------------------
-# Before / after content transformations
+# Data
 # ----------------------------------------------------------------------------
-PAIRS = [
-    ("Canton Fair",
-     "Canton Fair 2027: The Complete Playbook", "Canton Fair 2027",
-     "We mapped all 9 Canton Fair halls and ranked them for SEA importers — the WorldFirst Hall Map. Free, link below.",
-     "WorldFirst Canton Fair map",
-     "The payoff is a named, branded asset. The brand is the only door to it."),
-    ("Supplier red flags",
-     "12 red flags in a supplier PI", "supplier PI red flags",
-     "The WorldFirst Supplier Check — the 12-flag scan our China desk runs on every factory invoice.",
-     "WorldFirst Supplier Check",
-     "The method is named for the brand. The framework carries it."),
-    ("Scam phrases",
-     "5 words a real supplier never says", "China supplier scams",
-     "Our fraud desk reviews 12,000 supplier invoices a month. The 5 phrases that always flag a scam.",
-     "WorldFirst fraud desk",
-     "Leads with the proprietary vantage only WorldFirst has. The authority is branded."),
-    ("FX cost",
-     "Your bank's CNY rate vs the real rate", "CNY to MYR rate",
-     "We built the True-Cost Check — see exactly what your bank's margin costs on a supplier payment.",
-     "WorldFirst True Cost",
-     "The payoff is a branded tool. You search the brand to use it."),
-    ("CNY calendar",
-     "CNY 2027 payment calendar", "CNY 2027 dates",
-     "The WorldFirst CNY Payment Calendar — every factory-close and last-safe-send date, one poster, updated yearly.",
-     "WorldFirst CNY calendar",
-     "A recurring, named, branded annual franchise people come back to."),
-    ("Customer story",
-     "An importer lost RM87,000 to a fake supplier", "(nothing branded)",
-     "An importer was about to lose RM87,000 — the exact check WorldFirst ran that caught it.",
-     "WorldFirst supplier verification",
-     "WorldFirst is the protagonist of the rescue, not a bystander narrating it."),
+PLAYS = [
+    ("Proprietary-data research franchise", "Gong Labs",
+     "Turn data only WorldFirst has into a named, recurring research series. Un-copyable, inherently quotable — it earns citations, and the brand name rides inside every one."),
+    ("Own a sub-language", "HubSpot · Drift",
+     "Coin and seed a phrase until the phrase and the brand are inseparable, and the category search becomes a brand search. Realistic for WF: not a grand new category — a sub-language like \"1688 supplier payments\" or \"same-day CNY.\""),
+    ("A consistent human face", "Ahrefs",
+     "A recurring presenter is a distinctive asset that carries a point of view. Trust forms faster around a person than a logo — personal accounts outperform brand accounts roughly 2×."),
+    ("A named recurring franchise", "Global Sourcing Guide",
+     "A named show accrues brand equity every episode, and the franchise name is itself the searchable asset. WorldFirst already has one — the discipline is to lock the name and never let it drift."),
+    ("Distinctive brand assets", "Gong · Ramp",
+     "Consistent visual and verbal codes let the audience attribute content in the 1.5 seconds a feed gives it. Campaigns with a recurring \"fluent device\" are 73% more likely to report large profit gains."),
+    ("Community and creators", "Notion · Clay",
+     "Give your most passionate users status, tools and amplification. Their content multiplies branded mentions outside your own channels, where they read as credible."),
 ]
 
-def pair_cards():
+CASES = [
+    ("Gong", "Proprietary-data research franchise",
+     "\"Gong Labs\" — a named, recurring research series built on data only Gong has: millions of recorded sales calls. The findings are un-copyable and inherently quotable, so they get cited, screenshotted and re-shared everywhere — and the brand name rides inside every citation. That is how \"Gong\" became inseparable from \"revenue intelligence.\" The single most transferable case for WorldFirst."),
+    ("Ahrefs", "Product-led content + a human face",
+     "Product-led educational content at scale, fronted by a visible CMO — Tim Soulo. Internal testing found ads run through Soulo's personal account performed 2× better than the same ads from the @Ahrefs brand account. $100M+ ARR, zero outside funding — built on content, not outbound."),
+    ("HubSpot &amp; Drift", "Category creation — own a phrase",
+     "HubSpot coined \"inbound marketing\"; Drift coined \"conversational marketing.\" Both deliberately refused to trademark the term — they wanted every agency and blogger using it, betting they could be the brand most associated with it. The category phrase itself became the brand search."),
+    ("Clay", "Category creation via a role",
+     "Clay invented a job title — \"GTM Engineer\" — a new identity for technical go-to-market operators. People put it on their LinkedIn profiles and in job postings. The identity spreads the brand: category creation through a role, carried by the people who adopt it."),
+    ("Mailchimp", "Engineer the search, then capture it",
+     "The purest case of manufacturing brand search on purpose: Mailchimp turned memorable mispronunciations of its name — MailShrimp, KaleLimp, FailChips — into real content, then bought paid search on all of them so the curiosity landed back on the brand. Worth knowing as a mechanic; too gimmicky to be WorldFirst's model."),
+]
+
+def plays_html():
     out = []
-    for tag, t_title, t_search, b_title, b_search, why in PAIRS:
-        out.append(f"""
-<div class="ba">
-  <p class="ba-tag">{tag}</p>
-  <div class="ba-grid">
-    <div class="ba-side ba-old">
-      <p class="ba-label">Topic-led — the old way</p>
-      <p class="ba-title">{t_title}</p>
-      <p class="ba-search">After watching, they Google: <span class="ba-q ba-q-leak">{t_search}</span></p>
-    </div>
-    <div class="ba-arrow">→</div>
-    <div class="ba-side ba-new">
-      <p class="ba-label">Brand-engineered</p>
-      <p class="ba-title">{b_title}</p>
-      <p class="ba-search">After watching, they Google: <span class="ba-q ba-q-win">{b_search}</span></p>
-    </div>
-  </div>
-  <p class="ba-why"><strong>Why it flips:</strong> {why}</p>
-</div>""")
+    for i, (name, case, desc) in enumerate(PLAYS, 1):
+        out.append(f"""<li class="play">
+          <p class="play-head"><span class="play-name">{name}</span><span class="play-case">{case}</span></p>
+          <p class="play-desc">{desc}</p>
+        </li>""")
+    return "\n".join(out)
+
+def cases_html():
+    out = []
+    for brand, mech, desc in CASES:
+        out.append(f"""<article class="case">
+          <div class="case-head"><h3>{brand}</h3><span class="case-mech">{mech}</span></div>
+          <p>{desc}</p>
+        </article>""")
     return "\n".join(out)
 
 # ----------------------------------------------------------------------------
@@ -86,122 +76,125 @@ def pair_cards():
 # ----------------------------------------------------------------------------
 HERO = """
 <header class="page-header">
-  <p class="eyebrow">WorldFirst · Content Strategy · Addendum</p>
+  <p class="eyebrow">WorldFirst · Content Strategy · Addendum · Rebuilt on evidence</p>
   <h1 class="page-title">Engineered for brand search.</h1>
-  <p class="page-byline">The content strategy, re-tailored so the audience searches WorldFirst — not just the topic. Brand search as the North Star.</p>
+  <p class="page-byline">How brands actually lift brand search through social — and the corrected play for WorldFirst, rebuilt on researched best practice.</p>
   <p class="addendum-link"><a href="index.html">← The base content strategy</a></p>
 </header>
 """
 
-NORTHSTAR = """
-<section id="northstar" class="section">
-  <p class="kicker">01 · The North Star</p>
-  <h2 class="section-title">Brand search is the metric this is built to move.</h2>
-  <p class="lede">The brief: one North Star — lift WorldFirst brand search through social. It is not the whole story of brand awareness, but it is the part you can read.</p>
-  <p>Brand search works as a North Star for three reasons. It is <strong>measurable</strong> — Google Search Console and Trends give you the volume. It is <strong>attributable to intent</strong> — someone typing "WorldFirst" has decided WorldFirst is the answer, which is exactly the shift social is meant to create. And it is a <strong>readable proxy</strong> — it will not capture everything, but it moves when awareness moves, so it is a usable reference for whether the spend is working.</p>
-  <p>One honest caveat carried through this whole document: brand search <em>lags</em> (2-4 months), and PR, paid and word-of-mouth move it too. So the strategy below pairs with a geo-holdout — see section 07 — to isolate social's share. With that caveat noted, the rest of this page does one thing: tailor the content so brand search actually goes up.</p>
+CORRECTION = """
+<section id="correction" class="section">
+  <p class="kicker">01 · The correction</p>
+  <h2 class="section-title">The metric was right. The tactic was wrong.</h2>
+  <p class="lede">This page got it wrong the first time. It said: attach the WorldFirst name to every asset — "the WorldFirst Canton Fair Map," "the WorldFirst Supplier Check." This is the corrected version, rebuilt on how brands actually do this.</p>
+  <p>Keep the North Star. Brand search is a legitimate one — Les Binet's Share of Search work (branded search divided by category search) correlates around <strong>83% with market share</strong> and <em>leads</em> it by 6-24 months. As a measurable proxy for brand awareness, it holds up.</p>
+  <p>But researching how brands actually engineer brand-search lift, the verdict on "attach the name" is blunt: it is the <strong>single weakest technique on the board</strong>. The B2B brands that have genuinely done this — Gong, Ahrefs, HubSpot — did something structurally different. This page replaces the naming exercise with what the evidence supports.</p>
 </section>
 """
 
-PROBLEM = """
-<section id="problem" class="section">
-  <p class="kicker">02 · The problem</p>
-  <h2 class="section-title">Topic content lifts topic search. Not brand search.</h2>
-  <p class="lede">This is the honest gap in the base strategy, and it is worth saying plainly before fixing it.</p>
-  <p>Take "Canton Fair 2027: The Complete Playbook." It is good content. But walk the viewer's actual path: they finish the video more interested in <em>Canton Fair</em> — so they Google "Canton Fair 2027." They do not Google "WorldFirst." The content raised <strong>topic intent</strong>, not <strong>brand intent</strong>. Worse, it raised intent that every competitor also benefits from — you have grown the category, not the brand.</p>
-  <p>This is the default failure mode of useful content marketing. Being <em>useful</em> earns attention; it does not, by itself, earn the brand search. A great explainer about a topic sends people to the topic. If brand search is the North Star, "make genuinely useful content" is necessary but nowhere near sufficient.</p>
-  <p>The fix is not to make the content less useful. It is to change <em>where the value attaches</em> — so the thing the viewer wants more of is unmistakably WorldFirst's.</p>
-</section>
-"""
-
-MECHANISM = """
-<section id="mechanism" class="section">
-  <p class="kicker">03 · The mechanism</p>
-  <h2 class="section-title">Three ways content actually drives brand search.</h2>
-  <p class="lede">Content lifts brand search only when WorldFirst is the gateway, the author, or the protagonist of the value — never just its publisher.</p>
-
-  <div class="mech-grid">
-    <div class="mech">
-      <p class="mech-num">Mode 01</p>
-      <h3>Gateway</h3>
-      <p>The payoff of the content is a named, branded asset — a map, a tool, a calendar, a dataset. The video gives the teaser; the asset is the resolution; the brand is the only door to it. To get the thing, you search the brand.</p>
+FAILS = """
+<section id="fails" class="section">
+  <p class="kicker">02 · Why it fails</p>
+  <h2 class="section-title">Attaching the name fails twice.</h2>
+  <p class="lede">It is not a small effect that needs scaling up. It is structurally wrong, and it loses on two fronts at once.</p>
+  <div class="fail-grid">
+    <div class="fail">
+      <p class="fail-num">Failure 01</p>
+      <h3>It loses reach</h3>
+      <p>Platforms throttle promotional framing. Explicit brand stamps and sales layers cut LinkedIn organic reach by up to <strong>40%</strong>, and branded content underperforms organic on engagement even setting algorithms aside. Putting the name on it shrinks the audience that could ever form a memory.</p>
     </div>
-    <div class="mech">
-      <p class="mech-num">Mode 02</p>
-      <h3>Author</h3>
-      <p>The method, framework or check is named for and authored by WorldFirst. People do not search "how to check a supplier" — they search "the WorldFirst Supplier Check." The framework carries the brand wherever it travels.</p>
-    </div>
-    <div class="mech">
-      <p class="mech-num">Mode 03</p>
-      <h3>Protagonist</h3>
-      <p>WorldFirst — or its named human, the China desk, the fraud desk — is <em>in</em> the story as the one who sees, knows, or solves. The authority belongs to the brand, not the topic. The viewer wants more of <em>that source</em>.</p>
+    <div class="fail">
+      <p class="fail-num">Failure 02</p>
+      <h3>It loses attribution</h3>
+      <p>A feed gives a post around <strong>1.5 seconds</strong> of attention. Only branding <em>structurally tied</em> to the content gets attributed in that window. A bolt-on logo or a "WorldFirst" prefix sits outside it — the viewer encodes the topic, not the brand. VCCP and Karen Nelson-Field: weak branding wastes <strong>66p of every £1</strong>.</p>
     </div>
   </div>
-  <p>Every piece in the re-tailored strategy has to run through at least one of these three modes. Useful-but-unattached content — the Canton Fair Playbook as originally framed — does not ship.</p>
+  <p>The Canton Fair symptom still holds — a topic video sends people to Google "Canton Fair." But the fix is not a better label. Renaming the asset "WorldFirst Canton Fair Map" is still a label; it still loses reach and still loses attribution. The fix is structural.</p>
 </section>
 """
 
-RULES = """
-<section id="rules" class="section">
-  <p class="kicker">04 · The rules</p>
-  <h2 class="section-title">Six rules every piece must pass.</h2>
-  <ol class="rules">
-    <li><strong>Name the asset.</strong> Every tool, map, list, calendar or dataset gets a WorldFirst-branded name. The payoff is branded — to get it, you search the brand.</li>
-    <li><strong>Own the method.</strong> Teach "the WorldFirst Supplier Check," never a generic "how to check a supplier." The framework is the brand's, and it carries the brand when shared.</li>
-    <li><strong>Show the vantage.</strong> Lead with the proprietary position only WorldFirst has — "our China desk sees 12,000 supplier invoices a month." The authority is branded, not borrowed from the topic.</li>
-    <li><strong>Build franchises.</strong> Recurring, named series — Trade Pulse, the Hall Map, the CNY Calendar — so people search the franchise, and the franchise contains the brand.</li>
-    <li><strong>Give it a face.</strong> A named, recurring WorldFirst human. A face becomes a brand mnemonic; people search the person and the brand together.</li>
-    <li><strong>Never let the topic travel alone.</strong> "Canton Fair" always arrives as "WorldFirst's Canton Fair Hall Map." Topic and brand become a single phrase in memory.</li>
+DISTINCTION = """
+<section id="distinction" class="section">
+  <p class="kicker">03 · The distinction</p>
+  <h2 class="section-title">Brand built-in, not brand bolted-on.</h2>
+  <p class="lede">This is the one distinction that the whole rebuild turns on. The goal is not less brand. It is not more brand. It is structural brand.</p>
+  <div class="cmp-grid">
+    <div class="cmp cmp-bad">
+      <p class="cmp-label">Bolt-on</p>
+      <p class="cmp-def">Branding is a separable layer — an end-card logo, a watermark, a "WorldFirst-" prefix on a title. Strip it away and the content is unchanged.</p>
+      <ul class="cmp-list">
+        <li>Platforms read the layer as promotional and throttle it.</li>
+        <li>Viewers skip the layer; they encode the topic, not the brand.</li>
+        <li>The appearance of branding without the mechanism of branding.</li>
+      </ul>
+      <p class="cmp-verdict">Loses reach <em>and</em> attribution.</p>
+    </div>
+    <div class="cmp cmp-good">
+      <p class="cmp-label">Built-in</p>
+      <p class="cmp-def">The brand is inseparable from the value. The recurring presenter <em>is</em> the format. The proprietary data carries the brand name in its title. The owned phrase <em>is</em> the subject.</p>
+      <ul class="cmp-list">
+        <li>You cannot strip the brand out without destroying the content.</li>
+        <li>Nothing for the algorithm to flag — no promotional penalty.</li>
+        <li>Attribution is total: the brand is the value, not a sticker on it.</li>
+      </ul>
+      <p class="cmp-verdict">Wins reach <em>and</em> attribution.</p>
+    </div>
+  </div>
+  <p>Every play that follows is a way of making the brand built-in. None of them attach a name.</p>
+</section>
+"""
+
+PLAYS_SEC = f"""
+<section id="plays" class="section">
+  <p class="kicker">04 · The plays</p>
+  <h2 class="section-title">Six plays that actually move brand search.</h2>
+  <p class="lede">Each one is proven by a B2B brand, and each one makes the brand structural rather than decorative.</p>
+  <ol class="plays">
+    {plays_html()}
   </ol>
 </section>
 """
 
-RETAILOR = f"""
-<section id="retailor" class="section">
-  <p class="kicker">05 · The re-tailoring</p>
-  <h2 class="section-title">Same ideas, re-engineered.</h2>
-  <p class="lede">Six pieces from the base strategy, before and after. The content is just as useful — the value simply attaches to WorldFirst instead of to the topic.</p>
-  {pair_cards()}
+CASES_SEC = f"""
+<section id="cases" class="section">
+  <p class="kicker">05 · The evidence</p>
+  <h2 class="section-title">Five brands that did it — without slapping the name on.</h2>
+  <p class="lede">The B2B cases worth being convinced by. Each used a real mechanic; none relied on labelling content with the brand.</p>
+  {cases_html()}
 </section>
 """
 
-TEST = """
-<section id="test" class="section">
-  <p class="kicker">06 · The test</p>
-  <h2 class="section-title">The brand-search test.</h2>
-  <p class="lede">One question, asked before anything publishes. It is the publishing gate.</p>
-  <div class="test-box">
-    <p class="test-q">After seeing this, what does the viewer type into Google?</p>
-    <div class="test-rows">
-      <div class="test-row test-fail">
-        <span class="test-verdict">FAILS</span>
-        <p>If the honest answer is the topic — "Canton Fair", "supplier scams", "CNY rate" — the content grew the category, not the brand. Re-engineer it through one of the three modes.</p>
-      </div>
-      <div class="test-row test-pass">
-        <span class="test-verdict">PASSES</span>
-        <p>If the answer is "WorldFirst [something]" — "WorldFirst Canton Fair map", "WorldFirst Supplier Check" — the content attached the value to the brand. Ship it.</p>
-      </div>
-    </div>
+WFPLAY = """
+<section id="wfplay" class="section">
+  <p class="kicker">06 · The WorldFirst play</p>
+  <h2 class="section-title">Lead with the Gong model.</h2>
+  <p class="lede">The headline recommendation, drawn straight from the evidence: a named, recurring research franchise built on WorldFirst's proprietary data.</p>
+  <p>WorldFirst sits on data nobody else has — cross-border payment flows, FX corridors, supplier-verification patterns, the scam attempts it blocks. Give that data a fixed-name franchise. Publish it on a fixed cadence. The brand name then rides inside every citation, every screenshot, every share — because the data is uncopyable and the brand is in the title. It is <strong>built-in by construction</strong>: there is nothing to strip out and nothing for an algorithm to flag.</p>
+  <p>Then stack the supporting plays: a consistent Global Sourcing Guide presenter (the human face), an owned sub-language seeded across everything ("1688 supplier payments"), and locked distinctive visual codes.</p>
+  <div class="callout">
+    <p class="callout-label">What this replaces</p>
+    <p>Version one's instinct — make WorldFirst the source and author — was right. Its execution — rename every asset "WorldFirst-X" — was the bolt-on version of that instinct. The research franchise is the <em>built-in</em> version of the same idea. Same goal, structural delivery.</p>
   </div>
-  <p>This is the discipline that makes brand search a reachable North Star instead of a hopeful one. The topic builds the category — useful, but shared with every competitor. Only the brand-attached search builds WorldFirst.</p>
 </section>
 """
 
 MEASURE = """
 <section id="measure" class="section">
-  <p class="kicker">07 · Measurement</p>
-  <h2 class="section-title">How the lift is read — and why it is geo-focused.</h2>
-  <p class="lede">A North Star is only useful if it is concentrated enough to move and clean enough to trust.</p>
+  <p class="kicker">07 · Realism &amp; measurement</p>
+  <h2 class="section-title">What brand search will, and won't, do.</h2>
+  <p class="lede">An honest North Star comes with honest limits. Three, and then how to read the lift.</p>
+  <ul class="real">
+    <li><strong>It is slow.</strong> Branded search is a leading indicator — it moves on a 6-24 month horizon, bounded by share of voice. No spike holds. Judge it on quarters, not posts.</li>
+    <li><strong>The navigational trap.</strong> WorldFirst is a fintech with daily-login account-holders. A large share of "WorldFirst" searches is existing customers reaching the login page — raw branded search measures your installed base, not new awareness. Track <em>net-new, non-navigational</em> branded search and the branded long-tail.</li>
+    <li><strong>Don't let the metric corrupt the creative.</strong> Flat, direct, "left-brain" creative drives short-term search and clicks faster — but kills the long-term brand effect. If the literal KPI becomes a near-term brand-search bump, the team will drift to direct-response creative that hits the number and hollows the brand. Brand search is the scoreboard, not the playbook.</li>
+  </ul>
 
-  <h3 class="sub">What to track</h3>
-  <p>Branded-query volume in Google Search Console and Google Trends. Two layers: the <strong>core</strong> — "worldfirst", "world first", "worldfirst account" — and the <strong>long-tail the content is designed to manufacture</strong> — "worldfirst canton fair map", "worldfirst supplier check", "worldfirst trade pulse". The long-tail is the cleanest proof of all: nobody types "worldfirst canton fair map" by accident. If that query exists at all, a specific piece of content created it.</p>
-
-  <h3 class="sub">Why one region, not six</h3>
-  <p>Brand search only moves as a <em>readable</em> signal if the spend is concentrated. Spread a budget across six markets and the lift is too thin to detect anywhere — you will have spent the money and learned nothing. Concentrate on one lead region (Malaysia), perhaps a second. One region also sets up a clean read: run the content in Malaysia, hold a comparable market dark, and compare the branded-search delta. That geo-holdout is what isolates social's contribution from PR, paid and word-of-mouth.</p>
-
+  <h3 class="sub">Prove it with a geo-holdout</h3>
+  <p>Run the content in one focus region (Malaysia), hold a comparable market dark, and compare the branded-search delta. It is the only way to isolate social's contribution from PR, paid and word-of-mouth. Concentrate the spend — brand search only moves as a readable signal when it is not spread thin.</p>
   <div class="chart-wrap">
     <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
-      <text x="20" y="22" font-family="JetBrains Mono" font-size="10" fill="#888">BRANDED SEARCH VOLUME · INDEXED TO BASELINE</text>
+      <text x="20" y="22" font-family="JetBrains Mono" font-size="10" fill="#888">NON-NAVIGATIONAL BRANDED SEARCH · INDEXED TO BASELINE</text>
       <line x1="48" y1="200" x2="500" y2="200" stroke="#E5E0D5"/>
       <line x1="48" y1="40" x2="48" y2="200" stroke="#E5E0D5"/>
       <g font-family="JetBrains Mono" font-size="9" fill="#888">
@@ -210,35 +203,27 @@ MEASURE = """
         <text x="42" y="48" text-anchor="end">200</text>
       </g>
       <line x1="160" y1="40" x2="160" y2="200" stroke="#E5E0D5" stroke-dasharray="3 3"/>
-      <text x="166" y="52" font-family="JetBrains Mono" font-size="9" fill="#888">content starts</text>
-      <polyline points="48,200 104,199 160,200 216,184 272,160 328,132 384,108 440,86 496,72"
+      <text x="166" y="52" font-family="JetBrains Mono" font-size="9" fill="#888">franchise launches</text>
+      <polyline points="48,200 104,199 160,200 216,186 272,164 328,138 384,114 440,92 496,76"
         fill="none" stroke="#E6185F" stroke-width="2.5"/>
       <polyline points="48,200 104,200 160,199 216,198 272,200 328,197 384,199 440,198 496,196"
         fill="none" stroke="#888" stroke-width="2" stroke-dasharray="4 3"/>
-      <circle cx="496" cy="72" r="4" fill="#E6185F"/>
-      <text x="488" y="64" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#E6185F">focus region (Malaysia)</text>
+      <circle cx="496" cy="76" r="4" fill="#E6185F"/>
+      <text x="488" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#E6185F">focus region (Malaysia)</text>
       <text x="488" y="188" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#888">holdout market</text>
     </svg>
   </div>
-  <p class="chart-cap">The read: focus-region branded search, indexed to baseline, monthly. The gap between the two lines is social's isolated contribution.</p>
-
-  <h3 class="sub">The honest reading</h3>
-  <ul>
-    <li><strong>Baseline first.</strong> Measure current branded-search volume in the focus region before any content runs. No baseline, no lift.</li>
-    <li><strong>Expect a lag.</strong> Brand search responds 2-4 months after content, not the same week. Judge it on a quarter, not a post.</li>
-    <li><strong>Watch the long-tail hardest.</strong> Core "worldfirst" volume is noisy. The branded long-tail — "worldfirst supplier check" — is the unambiguous proof the content is doing its job.</li>
-    <li><strong>Don't over-gate.</strong> Engineering for brand search must not make the content worse. The brand is the souvenir, not a tollbooth — if the content is weak, attaching it to the brand just means nobody searches at all.</li>
-  </ul>
+  <p class="chart-cap">The read: focus-region non-navigational branded search, indexed to baseline, monthly. The gap between the lines is social's isolated contribution — visible on a 6-24 month horizon, not in weeks.</p>
 </section>
 """
 
 FOOTER = """
 <footer class="site-footer">
-  <p>WorldFirst · Internal · Content Strategy / Brand Search · May 2026 · <a href="#" id="lock">lock device</a></p>
+  <p>WorldFirst · Internal · Content Strategy / Brand Search · Rebuilt May 2026 · <a href="#" id="lock">lock device</a></p>
 </footer>
 """
 
-INNER = HERO + NORTHSTAR + PROBLEM + MECHANISM + RULES + RETAILOR + TEST + MEASURE + FOOTER
+INNER = HERO + CORRECTION + FAILS + DISTINCTION + PLAYS_SEC + CASES_SEC + WFPLAY + MEASURE + FOOTER
 
 # ----------------------------------------------------------------------------
 # CSS
@@ -252,7 +237,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 body.locked .wrap{filter:blur(20px);pointer-events:none;user-select:none;}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;}
 a:hover{text-decoration-color:var(--wf-pink);}
-code{font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--line-soft);padding:1px 5px;border-radius:2px;}
 .progress{position:fixed;top:0;left:0;height:2px;background:var(--wf-pink);z-index:100;width:0;transition:width .05s linear;}
 .gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
 .gate-card{width:100%;max-width:420px;text-align:center;}
@@ -276,7 +260,7 @@ code{font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--lin
 .page-header{padding-bottom:40px;border-bottom:1px solid var(--line);margin-bottom:52px;}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--wf-pink);margin-bottom:20px;}
 .page-title{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:58px;line-height:1.03;letter-spacing:-.025em;margin-bottom:16px;}
-.page-byline{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:21px;color:var(--ink-soft);max-width:620px;margin-bottom:18px;}
+.page-byline{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:21px;color:var(--ink-soft);max-width:640px;margin-bottom:18px;}
 .addendum-link{font-family:'JetBrains Mono',monospace;font-size:12px;}
 .addendum-link a{color:var(--ink-mute);}
 .section{padding-top:58px;padding-bottom:34px;scroll-margin-top:24px;border-top:1px solid var(--line);}
@@ -288,51 +272,55 @@ code{font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--lin
 .section em{font-style:italic;}
 .lede{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:19px;color:var(--ink-soft);margin-bottom:22px;max-width:700px;line-height:1.5;}
 .sub{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;margin:30px 0 12px;letter-spacing:-.01em;}
-.section ul{margin:8px 0 16px 22px;max-width:720px;}
-.section li{margin-bottom:7px;}
-.section li strong{color:var(--ink);}
-/* mechanism */
-.mech-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:18px;}
-@media(max-width:760px){.mech-grid{grid-template-columns:1fr;}}
-.mech{border:1px solid var(--line);border-radius:4px;padding:20px 22px;background:var(--paper);}
-.mech-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--wf-pink);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
-.mech h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;margin-bottom:8px;}
-.mech p{font-size:13.5px;color:var(--ink-soft);margin:0;}
-/* rules */
-.rules{list-style:none;counter-reset:r;padding:0;margin:0;max-width:740px;}
-.rules li{counter-increment:r;position:relative;padding:14px 0 14px 44px;border-bottom:1px solid var(--line-soft);font-size:14.5px;color:var(--ink-soft);}
-.rules li:last-child{border-bottom:none;}
-.rules li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--wf-pink);}
-/* before/after */
-.ba{margin-bottom:18px;border:1px solid var(--line);border-radius:4px;padding:20px 22px;background:var(--paper);}
-.ba-tag{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--wf-pink);margin-bottom:14px;}
-.ba-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;}
-@media(max-width:700px){.ba-grid{grid-template-columns:1fr;}.ba-arrow{display:none;}}
-.ba-side{padding:14px 16px;border-radius:4px;}
-.ba-old{background:var(--line-soft);}
-.ba-new{background:#FFF1F5;border:1px solid var(--wf-pink-soft);}
-.ba-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-mute);margin-bottom:8px;}
-.ba-title{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:16px;line-height:1.25;color:var(--ink);margin-bottom:10px;}
-.ba-search{font-size:12px;color:var(--ink-soft);margin:0;}
-.ba-q{font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 7px;border-radius:3px;display:inline-block;margin-top:3px;}
-.ba-q-leak{background:#fff;border:1px solid var(--line);color:var(--ink-mute);}
-.ba-q-win{background:var(--wf-pink);color:#fff;}
-.ba-arrow{display:flex;align-items:center;color:var(--wf-pink);font-size:20px;}
-.ba-why{font-size:13px;color:var(--ink-soft);margin:14px 0 0!important;padding-top:12px;border-top:1px solid var(--line-soft);}
-.ba-why strong{color:var(--ink);}
-/* test */
-.test-box{border:1px solid var(--ink);border-radius:5px;padding:24px 26px;background:var(--paper);margin-bottom:16px;}
-.test-q{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;color:var(--ink);margin-bottom:18px!important;}
-.test-rows{display:flex;flex-direction:column;gap:12px;}
-.test-row{display:grid;grid-template-columns:80px 1fr;gap:14px;align-items:start;}
-.test-verdict{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;padding:5px 0;text-align:center;border-radius:3px;}
-.test-fail .test-verdict{border:1px solid var(--ink-mute);color:var(--ink-mute);}
-.test-pass .test-verdict{background:var(--wf-pink);color:#fff;}
-.test-row p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+/* fail grid */
+.fail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
+@media(max-width:700px){.fail-grid{grid-template-columns:1fr;}}
+.fail{border:1px solid var(--line);border-radius:4px;padding:22px 24px;background:var(--paper);}
+.fail-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--wf-pink);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.fail h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;margin-bottom:8px;}
+.fail p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+/* compare */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:700px){.cmp-grid{grid-template-columns:1fr;}}
+.cmp{border:1px solid var(--line);border-radius:4px;padding:22px 24px;}
+.cmp-bad{background:var(--line-soft);}
+.cmp-good{background:#FFF1F5;border-color:var(--wf-pink-soft);}
+.cmp-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;}
+.cmp-bad .cmp-label{color:var(--ink-mute);}
+.cmp-good .cmp-label{color:var(--wf-pink);}
+.cmp-def{font-size:14px;color:var(--ink-soft);margin-bottom:12px;}
+.cmp-list{list-style:none;padding:0;margin:0 0 12px;}
+.cmp-list li{font-size:13px;color:var(--ink-soft);padding:5px 0 5px 16px;position:relative;}
+.cmp-list li::before{content:"·";position:absolute;left:2px;color:var(--wf-pink);}
+.cmp-verdict{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:16px;color:var(--ink);margin:0;}
+/* plays */
+.plays{list-style:none;counter-reset:p;padding:0;margin:0;}
+.play{counter-increment:p;position:relative;padding:16px 0 16px 44px;border-bottom:1px solid var(--line-soft);max-width:760px;}
+.play:last-child{border-bottom:none;}
+.play::before{content:counter(p,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--wf-pink);}
+.play-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px!important;}
+.play-name{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:18px;color:var(--ink);}
+.play-case{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--wf-pink);border:1px solid var(--wf-pink-soft);border-radius:100px;padding:3px 9px;}
+.play-desc{font-size:13.5px;color:var(--ink-soft);margin:0!important;}
+/* cases */
+.case{border:1px solid var(--line);border-radius:4px;padding:20px 24px;background:var(--paper);margin-bottom:14px;}
+.case-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+.case-head h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;color:var(--ink);}
+.case-mech{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-mute);}
+.case p{font-size:14px;color:var(--ink-soft);margin:0;}
+/* callout */
+.callout{border:1px solid var(--ink);border-radius:5px;padding:20px 24px;background:var(--paper);margin-top:6px;}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--wf-pink);margin-bottom:8px!important;}
+.callout p:last-child{font-size:14px;color:var(--ink-soft);margin:0;}
+/* realism */
+.real{list-style:none;padding:0;margin:0 0 8px;max-width:760px;}
+.real li{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px;color:var(--ink-soft);}
+.real li:last-child{border-bottom:none;}
+.real li strong{color:var(--ink);}
 /* chart */
 .chart-wrap{border:1px solid var(--line);border-radius:4px;padding:18px;background:var(--paper);margin:14px 0 8px;}
 .chart-wrap svg{display:block;width:100%;height:auto;}
-.chart-cap{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-mute);margin-bottom:18px!important;}
+.chart-cap{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-mute);}
 .site-footer{margin-top:48px;padding-top:26px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.08em;}
 .site-footer a{color:var(--wf-pink);text-decoration:none;}
 """
@@ -358,7 +346,7 @@ HTML = """<!doctype html>
   <div class="gate-card">
     <p class="gate-eyebrow">WorldFirst · Internal</p>
     <h1 class="gate-title">Brand Search</h1>
-    <p class="gate-subtitle">The content strategy, re-tailored.</p>
+    <p class="gate-subtitle">The content strategy, rebuilt on evidence.</p>
     <form id="gate-form" onsubmit="return gateSubmit(event)">
       <input id="gate-input" type="password" placeholder="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
       <button id="gate-btn" type="submit">enter</button>
@@ -376,13 +364,13 @@ async function decryptPayload(pw){const b=JSON.parse(document.getElementById('pa
 function mountContent(html){
   const wrap=document.createElement('div');wrap.className='wrap';
   wrap.innerHTML=`<aside class="toc"><p class="toc-lbl">Contents</p><ul class="toc-list">
-    <li><a href="#northstar">01 · The North Star</a></li>
-    <li><a href="#problem">02 · The problem</a></li>
-    <li><a href="#mechanism">03 · The mechanism</a></li>
-    <li><a href="#rules">04 · Six rules</a></li>
-    <li><a href="#retailor">05 · The re-tailoring</a></li>
-    <li><a href="#test">06 · The brand-search test</a></li>
-    <li><a href="#measure">07 · Measurement</a></li>
+    <li><a href="#correction">01 · The correction</a></li>
+    <li><a href="#fails">02 · Why it fails</a></li>
+    <li><a href="#distinction">03 · Built-in vs bolt-on</a></li>
+    <li><a href="#plays">04 · The plays</a></li>
+    <li><a href="#cases">05 · The evidence</a></li>
+    <li><a href="#wfplay">06 · The WorldFirst play</a></li>
+    <li><a href="#measure">07 · Realism &amp; measurement</a></li>
   </ul></aside><main>${html}</main>`;
   const t=document.getElementById('content');t.innerHTML='';t.appendChild(wrap);t.hidden=false;
   document.getElementById('gate').style.display='none';document.body.classList.remove('locked');initScroll();
