@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Project Canopy — Foundation Exploration.
-Five candidate angles for the Sourcing Tree, each shown as the audience would see it.
-Exploration artifact, not a decision. Encrypts inner content with 'wf'.
+Project Canopy — Foundation Exploration (recut).
+Five candidate angles for the Sourcing Tree, re-derived through the audience's
+lens only. Each shown as a Malaysian importer would see it. Encrypts with 'wf'.
 """
 import os, base64, json, pathlib
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -42,7 +42,7 @@ def scorecard(rows):
         f'<div class="score-row"><span class="score-lbl">{l}</span>{dots(n)}</div>'
         for l, n in rows) + '</div>'
 
-def option(num, sid, name, question, what, feed_items, why, score_rows, catch):
+def option(num, sid, name, question, what, feed_items, why, score_rows):
     return f"""
 <section id="{sid}" class="section">
   <p class="kicker">Angle {num}</p>
@@ -51,11 +51,10 @@ def option(num, sid, name, question, what, feed_items, why, score_rows, catch):
   <p>{what}</p>
   <p class="block-lbl">What a Malaysian importer would see</p>
   {feed(feed_items)}
-  <p class="block-lbl">Why they click, or don't</p>
+  <p class="block-lbl">Why they want it</p>
   <p>{why}</p>
-  <p class="block-lbl">The read</p>
+  <p class="block-lbl">Through the audience's eyes</p>
   {scorecard(score_rows)}
-  <p class="catch">{catch}</p>
 </section>
 """
 
@@ -64,94 +63,82 @@ def option(num, sid, name, question, what, feed_items, why, score_rows, catch):
 # ----------------------------------------------------------------------------
 HERO = """
 <header class="page-header">
-  <p class="eyebrow">Project Canopy · Foundation Exploration</p>
+  <p class="eyebrow">Project Canopy · Foundation Exploration · Recut</p>
   <h1 class="page-title">Where the content starts.</h1>
-  <p class="page-byline">Five candidate angles for the Sourcing Tree, and how each one looks to a Malaysian importer. An exploration, not a decision.</p>
-  <p class="addendum-link"><a href="canopy.html">&larr; Project Canopy</a> · Audience: ~600,000 Malaysian sellers who look local and source from China</p>
+  <p class="page-byline">Five angles for the Sourcing Tree, re-derived through one lens only: what a Malaysian importer is truly interested in.</p>
+  <p class="addendum-link"><a href="canopy.html">&larr; Project Canopy</a> · Audience: ~600,000 Malaysian sellers who source from China and sell at home</p>
 </header>
 """
 
 HOW = """
 <section id="how" class="section">
   <p class="kicker">How to read this</p>
-  <h2 class="section-title">The foundation is the one decision that changes every other one.</h2>
-  <p class="lede">The trunk is a single heavy research effort. Every branch of content derives from it. Choose the angle wrong and twenty pieces are wrong.</p>
-  <p>So the angle is not picked by what is convenient, or by what we have built before. It is picked by what the audience actually cares about and will actually watch. This page puts five candidate angles side by side and shows, for each, the content a Malaysian importer would really see in their feed.</p>
-  <p>Everything below is judged against five tests. The first is the one that matters most.</p>
-  <ul class="tests">
-    <li><strong>Click-to-watch.</strong> Would the audience genuinely stop and watch this. Not &ldquo;should they&rdquo;.</li>
-    <li><strong>Evergreen.</strong> The research base does not rot in three months.</li>
-    <li><strong>Ownable.</strong> WorldFirst can credibly research and own it, through the newsroom model, with no China desk we do not have.</li>
-    <li><strong>Watchable.</strong> Story-rich, not chart-rich. Charts do not get watched.</li>
-    <li><strong>Brand link.</strong> WorldFirst connects to it honestly, never as a pitch.</li>
-  </ul>
-  <p class="method-note"><strong>Status.</strong> No angle has been chosen. All five can become trunks over time. The open question is only which one the Sourcing Tree starts with.</p>
+  <h2 class="section-title">Take two. This time, only the audience's lens.</h2>
+  <p class="lede">The first set of angles was scored on whether WorldFirst could own them, defend them, keep them evergreen, attach the brand. That is WorldFirst's lens. It ranked the one thing the audience wants most, what to sell, stone last.</p>
+  <p>A Malaysian importer does not care whether we can own a topic. They care what makes them money. So the only lens on this page is theirs: what they search for, click, save, send, and act on.</p>
+  <p>One rule runs underneath all of it. <strong>The audience does not want content about their situation. They want a tool for their next decision.</strong> Not the story of sourcing, but what to sell. Not the emotion of a scam, but the ten-minute check. Five angles, re-derived that way.</p>
+  <p class="method-note"><strong>Status.</strong> Still an exploration. No angle chosen. WorldFirst's connection to the content is real, and it is handled once, at the end. It is a consequence of the angle, not a filter on it.</p>
 </section>
 """
 
 O1 = option(
-  "01", "a1", "The Sourcing Reality",
-  "Is this going to blow up in my face, and who is actually making it work?",
-  "The real story of sourcing from China, told by the Malaysian sellers who lived it. How it breaks, how the survivors avoid it, and the short list of learnable decisions in between. The burn and the win, side by side.",
-  [("youtube","YouTube title","I Lost RM38,000 to a 1688 Supplier. Here's Every Mistake I Made."),
-   ("short","Short video hook","Your sample arrived perfect. That is exactly when you should worry."),
-   ("carousel","Carousel headline","4 ways a China supplier takes your money, and the 10-minute check that stops all four."),
-   ("post","Feed post","She had ordered from the same factory six times. The seventh order never shipped. Here is what changed between order six and seven.")],
-  "Fear and recognition at the same time. Every importer in Malaysia has a near-miss story, or knows someone who has the real one. This is people exactly like them, and disaster plus survival is the most watchable material there is. They do not just click it, they send it to the other sellers in their group chat.",
-  [("Click-to-watch",3),("Evergreen",3),("Ownable",3),("Watchable",3),("Brand link",2)],
-  "The brand link is real but soft: WorldFirst is how you do not become the story, never the headline. For a trust-led foundation, that restraint is the point, not a weakness."
+  "01", "a1", "The Profit Map",
+  "What should I actually be selling?",
+  "A real research effort into where the money is for a Malaysian importer. The categories and products that are genuinely profitable to import from China and sell in Malaysia, with margin, demand and competition mapped and ranked. Re-cut every year.",
+  [("youtube","YouTube title","The 5 Most Profitable Things to Import and Sell in Malaysia in 2026."),
+   ("short","Short video hook","Stop selling phone cases. This is what is actually making sellers money in 2026."),
+   ("carousel","Carousel headline","8 categories ranked by real margin. Number 3 surprised us."),
+   ("post","Feed post","Everyone asks what to sell. So we ran the numbers on 40 categories. Here are the five worth your money this year.")],
+  "This is the question every seller asks before any other, and the one almost nobody answers with real work instead of a guess. A ranked list, a promise of profit, their market, this year. They search it, they click it, they save it, they send it to their group chat. It is also the strongest franchise on the page: a fresh edition every year, and a category deep dive sitting behind every line on the map.",
+  [("Searched",3),("Watched",3),("Saved &amp; sent",3),("Points at profit",3)]
 )
 
 O2 = option(
-  "02", "a2", "The Real Numbers",
-  "Am I actually making money, or am I fooling myself?",
-  "The honest economics of importing. What it truly costs to land a product from China, what a Malaysian seller truly earns, and which costs quietly disappear before anyone counts them.",
-  [("youtube","YouTube title","The Real Cost of a RM10 Product from 1688 (Full Breakdown)."),
-   ("short","Short video hook","You think your margin is 40%. Let me show you where a third of it goes."),
-   ("carousel","Carousel headline","7 costs between the 1688 price and your shelf. Most sellers count three."),
-   ("post","Feed post","A RM12 landed cost is not a RM12 product. Here is the other RM8 nobody printed on the invoice.")],
-  "This is the survival question, the profit-and-loss every serious seller is privately unsure about. High intent. The catch is form: it is breakdowns and numbers, closer to a lesson than a story, so it gets read more than it gets watched.",
-  [("Click-to-watch",2),("Evergreen",2),("Ownable",3),("Watchable",2),("Brand link",3)],
-  "Strongest product link of the five, because WorldFirst is one of the line items. That is also the trap: this is the angle that most easily turns into a sales deck."
+  "02", "a2", "The Price Breakdown",
+  "If I import this, what do I actually make?",
+  "The real money math. Take one real product, follow it from the 1688 price to the Malaysian shelf, and show the true landed cost and the true profit, in ringgit, with nothing left out. Worked examples, not a theory lecture.",
+  [("youtube","YouTube title","I Imported a RM4 Item from 1688. Here Is Exactly What I Made on It."),
+   ("short","Short video hook","1688 price: RM4.20. Shelf price: RM29. Your profit is not RM24.80. Here is the real figure."),
+   ("carousel","Carousel headline","From the 1688 listing to your Shopee shelf: every cost, on one real product."),
+   ("post","Feed post","A RM4 product is not a RM4 product. Here is its full journey to your customer, in ringgit, with nothing hidden.")],
+  "Sellers do not want a lecture on the costs they are missing. They want the real number on a real product, laid out so they can copy the math straight onto their own. Concrete, copyable, and pointed directly at profit. It is the most saved angle of the five.",
+  [("Searched",2),("Watched",2),("Saved &amp; sent",3),("Points at profit",3)]
 )
 
 O3 = option(
-  "03", "a3", "The Insider's China",
-  "What is my supplier actually thinking, and what do I not know?",
-  "The supplier side, decoded. How Chinese factories, trading companies and 1688 actually work, explained for the Malaysian buyer who only ever sees the chat window.",
-  [("youtube","YouTube title","What Your 1688 Supplier Means When They Say 'No Problem'."),
-   ("short","Short video hook","That factory you are chatting with? Here is how to tell if it is actually a middleman."),
-   ("carousel","Carousel headline","How a Chinese supplier decides your price. It is not the number on the listing."),
-   ("post","Feed post","Factory or trading company? Your supplier will never tell you straight. These three questions will.")],
-  "The China side is a black box, and the buyer badly wants it opened. This is the most genuinely insider of the five, and it sits cleanly inside the sourcing-insider positioning.",
-  [("Click-to-watch",3),("Evergreen",3),("Ownable",2),("Watchable",2),("Brand link",1)],
-  "Weakest brand link: it is pure authority content with no natural home for the product. It also overlaps the existing Global Sourcing Guide videos on YouTube, so it risks repeating work instead of compounding it."
+  "03", "a3", "The Sourcing Playbook",
+  "Where do I find it, and how do I buy it without getting burned?",
+  "The practical how-to of getting the product in hand. Where to find the supplier, how to get the price down, how to place the order, and how not to get cheated doing it.",
+  [("youtube","YouTube title","How to Find a 1688 Supplier That Will Not Waste Your Money."),
+   ("short","Short video hook","Three messages. That is all it takes to tell a real factory from a middleman."),
+   ("carousel","Carousel headline","The 10-minute check before you pay any China supplier a single cent."),
+   ("post","Feed post","You found the product. Now the part nobody explains properly: how to actually buy it, safely, from 8,000km away.")],
+  "Once a seller knows what to sell, this is the very next thing they need, and they need it as steps, not as a story. The scam-avoidance the audience genuinely worries about lives here as a practical check, not an emotional documentary. Pure do-this-now content, and the most saved alongside the Price Breakdown.",
+  [("Searched",3),("Watched",2),("Saved &amp; sent",3),("Points at profit",2)]
 )
 
 O4 = option(
-  "04", "a4", "The Shelf War",
-  "Chinese sellers are undercutting me on my own marketplace. How do I survive that?",
-  "The Malaysian seller against the Chinese cross-border seller, on the same Shopee shelf. Why the local sellers have lost ground for a decade, and what the ones still standing do differently.",
-  [("youtube","YouTube title","Why the Chinese Seller Next to You Charges RM5 Less, and Still Wins."),
-   ("short","Short video hook","Local sellers held 65% of this market in 2015. Today it is 40%. Here is where it went."),
-   ("carousel","Carousel headline","5 advantages a cross-border seller has over you. You can close three of them."),
-   ("post","Feed post","You are not competing with a shop. You are competing with the supply chain behind it. Different fight, different playbook.")],
-  "Identity and fear together. This is their fight and it is personal. It travels fast inside seller communities because it names something every local seller already feels but rarely sees explained.",
-  [("Click-to-watch",3),("Evergreen",2),("Ownable",2),("Watchable",3),("Brand link",2)],
-  "Competitive dynamics shift, so parts of this date faster than the other angles. It works better as a recurring angle on top of a foundation than as the permanent foundation itself."
+  "04", "a4", "The Trend Radar",
+  "What is hot right now, and what should I stock next?",
+  "The fast read on what is selling in Malaysia right now, what is cooling off, and what to order from China before each season. The timely, frequently-refreshed angle.",
+  [("youtube","YouTube title","What Malaysians Are Buying Right Now, and What to Import Before Raya."),
+   ("short","Short video hook","This category looked dead last year. Look at it now."),
+   ("carousel","Carousel headline","5 products heating up on Shopee Malaysia this quarter."),
+   ("post","Feed post","Year-end is 11 weeks away. Here is what to order from China now, while the factories still have the time.")],
+  "Sellers live and die on timing. Stock the wrong thing, or the right thing too late, and the season is gone. This is the angle they check again and again, not once. The trade-off is built in and fine: it dates fast, which is exactly why it works as a frequently-refreshed branch format rather than a once-a-year report.",
+  [("Searched",3),("Watched",3),("Saved &amp; sent",2),("Points at profit",2)]
 )
 
 O5 = option(
-  "05", "a5", "What Actually Sells",
-  "What should I sell, and what is working right now?",
-  "The product reality. Which categories actually move in Malaysia, what is saturated, and what a genuinely winning product looks like before you commit money to it.",
-  [("youtube","YouTube title","5 Product Categories Quietly Dying on Shopee Malaysia."),
-   ("short","Short video hook","Everyone is selling this. That is exactly why you should not."),
-   ("carousel","Carousel headline","How to read a 1688 listing's order volume before you commit a cent."),
-   ("post","Feed post","A winning product is not the one with the best margin. It is the one you can restock in nine days.")],
-  "This is the number one obsession of every seller alive. Raw click is the highest of all five angles, by a clear distance. It is included here precisely so the trade-off is visible on the page.",
-  [("Click-to-watch",3),("Evergreen",1),("Ownable",1),("Watchable",3),("Brand link",1)],
-  "We cannot own it. A payments company publishing product picks is off-key, the space is saturated with dedicated product-research creators who will always beat us, and the content dates within months. Highest click, lowest everything else."
+  "05", "a5", "The Proof",
+  "Who is actually doing this, and what did it really take?",
+  "Real Malaysian importers, real numbers. What a working store actually chose, paid, and earned. The case study with the figures in it, not the highlight reel.",
+  [("youtube","YouTube title","She Sells RM40,000 a Month on Shopee. We Went Through Her Numbers."),
+   ("short","Short video hook","He started with RM3,000 and one category. Here is what year one really looked like."),
+   ("carousel","Carousel headline","One seller, one product, the real first-year profit and loss."),
+   ("post","Feed post","Not a success story. The actual numbers: what she imported, what it cost her, what she kept.")],
+  "Proof and aspiration at once. A seller wants to see someone like them actually doing it, with the real figures on the table, so they can trace the path themselves. It is more aspiration than tool, which is why it watches better than it gets searched, but it earns trust like nothing else can.",
+  [("Searched",2),("Watched",3),("Saved &amp; sent",2),("Points at profit",2)]
 )
 
 def crow(name, scores):
@@ -160,35 +147,45 @@ def crow(name, scores):
 
 COMPARE = f"""
 <section id="compare" class="section">
-  <p class="kicker">The five together</p>
-  <h2 class="section-title">No angle wins every test.</h2>
-  <p class="lede">Read down the columns, not just across the rows. The trade-offs are the whole point.</p>
+  <p class="kicker">Side by side</p>
+  <h2 class="section-title">All five, through the audience's eyes.</h2>
+  <p class="lede">Scored only on the audience. Read down the columns.</p>
   <div class="table-wrap">
     <table class="rtbl">
       <thead>
-        <tr><th>Angle</th><th>Click</th><th>Evergreen</th><th>Ownable</th><th>Watchable</th><th>Brand link</th></tr>
+        <tr><th>Angle</th><th>Searched</th><th>Watched</th><th>Saved &amp; sent</th><th>Points at profit</th></tr>
       </thead>
       <tbody>
-        {crow("01 The Sourcing Reality",[3,3,3,3,2])}
-        {crow("02 The Real Numbers",[2,2,3,2,3])}
-        {crow("03 The Insider's China",[3,3,2,2,1])}
-        {crow("04 The Shelf War",[3,2,2,3,2])}
-        {crow("05 What Actually Sells",[3,1,1,3,1])}
+        {crow("01 The Profit Map",[3,3,3,3])}
+        {crow("02 The Price Breakdown",[2,2,3,3])}
+        {crow("03 The Sourcing Playbook",[3,2,3,2])}
+        {crow("04 The Trend Radar",[3,3,2,2])}
+        {crow("05 The Proof",[2,3,2,2])}
       </tbody>
     </table>
   </div>
-  <p>Angle five wins raw attention and loses everything else: we cannot own it or sustain it. Angle three and angle four are strong, but each carries a structural catch, an overlap in one case and a shelf-life in the other. Angle two connects hardest to the product, which is exactly why it is the easiest to get wrong. Angle one is the only one that holds up across all five tests at once.</p>
-  <p>That is an observation, not a decision. All five can become trunks in time. The only question on the table is which angle the Sourcing Tree starts with, and that call is yours.</p>
+  <p>The Profit Map leads, because &ldquo;what should I sell&rdquo; is the question every Malaysian importer asks before any other, and the one almost nobody answers with real research. The other four are strong, and all five can become trunks in time. The open question is only which one the Sourcing Tree starts with.</p>
+</section>
+"""
+
+WHEREWF = """
+<section id="wf" class="section">
+  <p class="kicker">Where WorldFirst fits</p>
+  <h2 class="section-title">The brand is the rail, not the headline.</h2>
+  <p class="lede">Every angle on this page is, underneath, a China-to-Malaysia import. The seller who acts on any of them has to source from China and pay a Chinese supplier. That payment is WorldFirst.</p>
+  <p>So the content does not need to be about WorldFirst to work for WorldFirst. It earns the audience by being genuinely useful about what to sell, what it costs, and where to buy. The product sits underneath, in the call to action and the natural moments, never the opening line. Value first, brand last.</p>
+  <p>The worry behind the first attempt, that a payments company cannot own content about products and profit, was the wrong worry. WorldFirst is the cross-border import company. Intelligence about where the Malaysian import opportunity actually is sits dead-center in its lane. That is more natural ground for the brand than emotional sourcing stories ever were.</p>
+  <p>So the angle gets chosen on what the audience wants. The WorldFirst connection follows from it. It does not lead.</p>
 </section>
 """
 
 FOOTER = """
 <footer class="site-footer">
-  <p>WorldFirst · Internal · Project Canopy · Foundation exploration · <a href="#" id="lock">lock device</a></p>
+  <p>WorldFirst · Internal · Project Canopy · Foundation exploration, recut · <a href="#" id="lock">lock device</a></p>
 </footer>
 """
 
-INNER = HERO + HOW + O1 + O2 + O3 + O4 + O5 + COMPARE + FOOTER
+INNER = HERO + HOW + O1 + O2 + O3 + O4 + O5 + COMPARE + WHEREWF + FOOTER
 
 # ----------------------------------------------------------------------------
 # CSS
@@ -237,10 +234,6 @@ a:hover{text-decoration-color:var(--wf-pink);}
 .lede{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:19px;color:var(--ink-soft);margin-bottom:16px;max-width:680px;line-height:1.5;}
 .method-note{font-size:13px;color:var(--ink-mute);border-left:2px solid var(--line);padding-left:14px;}
 .method-note strong{color:var(--ink-soft);}
-.tests{margin:14px 0 0 0;padding:0;list-style:none;max-width:700px;}
-.tests li{padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--ink-soft);}
-.tests li:last-child{border-bottom:none;}
-.tests li strong{color:var(--ink);}
 .block-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--wf-pink);margin:26px 0 4px;}
 /* mock feed */
 .feed{display:flex;flex-direction:column;gap:10px;margin:12px 0 6px;max-width:620px;}
@@ -259,7 +252,6 @@ a:hover{text-decoration-color:var(--wf-pink);}
 .dots{display:flex;gap:5px;}
 .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--wf-pink);box-sizing:border-box;}
 .dot-on{background:var(--wf-pink);}
-.catch{font-size:13px;color:var(--ink-soft);border-left:2px solid var(--wf-pink);padding-left:13px;margin-top:14px;max-width:640px;}
 /* table */
 .table-wrap{overflow-x:auto;margin:18px 0 16px;}
 .rtbl{width:100%;border-collapse:collapse;font-size:13.5px;}
@@ -311,12 +303,13 @@ function mountContent(html){
   const wrap=document.createElement('div');wrap.className='wrap';
   wrap.innerHTML=`<aside class="toc"><p class="toc-lbl">Angles</p><ul class="toc-list">
     <li><a href="#how">How to read this</a></li>
-    <li><a href="#a1">01 · The Sourcing Reality</a></li>
-    <li><a href="#a2">02 · The Real Numbers</a></li>
-    <li><a href="#a3">03 · The Insider's China</a></li>
-    <li><a href="#a4">04 · The Shelf War</a></li>
-    <li><a href="#a5">05 · What Actually Sells</a></li>
-    <li><a href="#compare">The five together</a></li>
+    <li><a href="#a1">01 · The Profit Map</a></li>
+    <li><a href="#a2">02 · The Price Breakdown</a></li>
+    <li><a href="#a3">03 · The Sourcing Playbook</a></li>
+    <li><a href="#a4">04 · The Trend Radar</a></li>
+    <li><a href="#a5">05 · The Proof</a></li>
+    <li><a href="#compare">Side by side</a></li>
+    <li><a href="#wf">Where WorldFirst fits</a></li>
   </ul></aside><main>${html}</main>`;
   const t=document.getElementById('content');t.innerHTML='';t.appendChild(wrap);t.hidden=false;
   document.getElementById('gate').style.display='none';document.body.classList.remove('locked');initScroll();
